@@ -1,0 +1,18 @@
+//
+// Dll Inject
+//
+// Copyright (c) 2020 Grigore Stefan <g_stefan@yahoo.com>
+// Created by Grigore Stefan <g_stefan@yahoo.com>
+//
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+//
+
+#include "xyo-application-version--os-windows-rc.hpp"
+#include "dll-inject-version.hpp"
+#include "dll-inject-copyright.hpp"
+
+1  ICON "dll-inject.ico"
+
+XYO_APPLICATION_VERSION_INFO(DLL_INJECT,"dll-inject.exe","Dll injector")
+
+XYO_APPLICATION_MANIFEST("dll-inject.manifest")

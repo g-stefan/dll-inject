@@ -1,0 +1,3 @@
+--exe dll-inject
+--use-path=source
+--use-project=xyo-win-inject.static
