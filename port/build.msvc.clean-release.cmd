@@ -3,6 +3,6 @@ rem Public domain
 rem http://unlicense.org/
 rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
-echo -^> clean-local-release dll-inject
+echo -^> clean-release dll-inject
 
 if exist release\ rmdir /Q /S release

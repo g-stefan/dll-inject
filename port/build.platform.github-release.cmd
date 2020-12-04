@@ -5,7 +5,7 @@ rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-echo -^> git-release dll-inject
+echo -^> github-release dll-inject
 
 if not exist release\ echo Error - no release & exit 1
 
