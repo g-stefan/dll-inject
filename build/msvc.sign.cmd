@@ -5,6 +5,6 @@ rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
 echo -^> sign dll-inject
 
-pushd bin
+pushd output
 for /r %%i in (*.exe) do call grigore-stefan.sign "DLL Inject" "%%i"
 popd
