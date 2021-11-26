@@ -10,10 +10,10 @@
 #ifndef DLL_INJECT_VERSION_HPP
 #define DLL_INJECT_VERSION_HPP
 
-#define DLL_INJECT_VERSION_ABCD                1,7,0,21
-#define DLL_INJECT_VERSION_STR                 "1.7.0"
+#define DLL_INJECT_VERSION_ABCD                1,9,0,21
+#define DLL_INJECT_VERSION_STR                 "1.9.0"
 #define DLL_INJECT_VERSION_STR_BUILD           "21"
-#define DLL_INJECT_VERSION_STR_DATETIME        "2021-11-15 16:51:55"
+#define DLL_INJECT_VERSION_STR_DATETIME        "2021-11-22 17:08:07"
 
 #ifndef XYO_RC
 
