@@ -12,7 +12,7 @@
 #include <string.h>
 
 #ifndef SECURITY_WIN32
-#define SECURITY_WIN32
+#	define SECURITY_WIN32
 #endif
 
 #include <windows.h>
@@ -51,49 +51,48 @@ void showUsage() {
 	printf("\tdll-inject [--hidden-realtime] dll app [app.cmd]\n");
 	printf("\tdll-inject [--hidden] dll app [app.cmd]\n");
 	printf("\tdll-inject [--realtime] dll app [app.cmd]\n\n");
-
 };
 
 int main(int nrCmd, char *strCmd[]) {
-	STARTUPINFO     sInfo;
+	STARTUPINFO sInfo;
 	PROCESS_INFORMATION pInfo;
 	DWORD cwFlags;
 	bool retVal;
 
-	char   *dllToInject;
-	int     index;
+	char *dllToInject;
+	int index;
 	XYO::String applicationToExecute;
-	bool    doWait;
-	bool    doHidden;
-	bool    doRealtime;
+	bool doWait;
+	bool doHidden;
+	bool doRealtime;
 
 	doWait = false;
 	doHidden = false;
 	doRealtime = false;
 
-	if(nrCmd == 2) {
-		if(strcmp(strCmd[1], "--license") == 0) {
+	if (nrCmd == 2) {
+		if (strcmp(strCmd[1], "--license") == 0) {
 			printf("%s", DllInject::License::content());
 			return 0;
 		};
 		return 1;
 	};
 
-	if(nrCmd < 3) {
+	if (nrCmd < 3) {
 		showUsage();
 		return 1;
 	};
 	index = 1;
-	if(strcmp(strCmd[index], "--wait") == 0) {
-		if(nrCmd < 4) {
+	if (strcmp(strCmd[index], "--wait") == 0) {
+		if (nrCmd < 4) {
 			showUsage();
 			return 1;
 		};
 		index++;
 		doWait = true;
 	};
-	if(strcmp(strCmd[index], "--wait-hidden-realtime") == 0) {
-		if(nrCmd < 4) {
+	if (strcmp(strCmd[index], "--wait-hidden-realtime") == 0) {
+		if (nrCmd < 4) {
 			showUsage();
 			return 1;
 		};
@@ -102,8 +101,8 @@ int main(int nrCmd, char *strCmd[]) {
 		doHidden = true;
 		doRealtime = true;
 	};
-	if(strcmp(strCmd[index], "--hidden-realtime") == 0) {
-		if(nrCmd < 4) {
+	if (strcmp(strCmd[index], "--hidden-realtime") == 0) {
+		if (nrCmd < 4) {
 			showUsage();
 			return 1;
 		};
@@ -111,16 +110,16 @@ int main(int nrCmd, char *strCmd[]) {
 		doHidden = true;
 		doRealtime = true;
 	};
-	if(strcmp(strCmd[index], "--hidden") == 0) {
-		if(nrCmd < 4) {
+	if (strcmp(strCmd[index], "--hidden") == 0) {
+		if (nrCmd < 4) {
 			showUsage();
 			return 1;
 		};
 		index++;
 		doHidden = true;
 	};
-	if(strcmp(strCmd[index], "--realtime") == 0) {
-		if(nrCmd < 4) {
+	if (strcmp(strCmd[index], "--realtime") == 0) {
+		if (nrCmd < 4) {
 			showUsage();
 			return 1;
 		};
@@ -130,9 +129,9 @@ int main(int nrCmd, char *strCmd[]) {
 
 	dllToInject = strCmd[index++];
 	applicationToExecute = "";
-	for(; index < nrCmd; index++) {
+	for (; index < nrCmd; index++) {
 		applicationToExecute << "\"" << strCmd[index] << "\"";
-		if(index < nrCmd) {
+		if (index < nrCmd) {
 			applicationToExecute << " ";
 		};
 	};
@@ -142,7 +141,7 @@ int main(int nrCmd, char *strCmd[]) {
 	sInfo.cb = sizeof(STARTUPINFO);
 	cwFlags = 0;
 
-	if(doHidden) {
+	if (doHidden) {
 		sInfo.dwFlags |= STARTF_USESHOWWINDOW;
 		sInfo.wShowWindow = SW_HIDE;
 	} else {
@@ -150,13 +149,13 @@ int main(int nrCmd, char *strCmd[]) {
 		sInfo.wShowWindow = SW_SHOW;
 	};
 
-	if(doRealtime) {
+	if (doRealtime) {
 		cwFlags = REALTIME_PRIORITY_CLASS;
 	};
 
 	retVal = XYO::Win::Inject::Process::createProcessA(0, (char *)applicationToExecute.value(), 0, 0, FALSE, cwFlags, 0, 0, &sInfo, &pInfo, dllToInject);
-	if(retVal) {
-		if(doWait) {
+	if (retVal) {
+		if (doWait) {
 			WaitForSingleObject(pInfo.hThread, INFINITE);
 		};
 	} else {
@@ -165,5 +164,3 @@ int main(int nrCmd, char *strCmd[]) {
 
 	return 0;
 };
-
-

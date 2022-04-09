@@ -10,11 +10,11 @@
 #ifndef DLL_INJECT_COPYRIGHT_HPP
 #define DLL_INJECT_COPYRIGHT_HPP
 
-#define DLL_INJECT_COPYRIGHT            "Copyright (c) Grigore Stefan"
-#define DLL_INJECT_PUBLISHER            "Grigore Stefan"
-#define DLL_INJECT_COMPANY              DLL_INJECT_PUBLISHER
-#define DLL_INJECT_CONTACT              "g_stefan@yahoo.com"
-#define DLL_INJECT_FULL_COPYRIGHT       DLL_INJECT_COPYRIGHT " <" DLL_INJECT_CONTACT ">"
+#define DLL_INJECT_COPYRIGHT "Copyright (c) Grigore Stefan"
+#define DLL_INJECT_PUBLISHER "Grigore Stefan"
+#define DLL_INJECT_COMPANY DLL_INJECT_PUBLISHER
+#define DLL_INJECT_CONTACT "g_stefan@yahoo.com"
+#define DLL_INJECT_FULL_COPYRIGHT DLL_INJECT_COPYRIGHT " <" DLL_INJECT_CONTACT ">"
 
 #ifndef XYO_RC
 

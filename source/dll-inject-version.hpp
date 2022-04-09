@@ -10,10 +10,10 @@
 #ifndef DLL_INJECT_VERSION_HPP
 #define DLL_INJECT_VERSION_HPP
 
-#define DLL_INJECT_VERSION_ABCD                1,13,0,25
-#define DLL_INJECT_VERSION_STR                 "1.13.0"
-#define DLL_INJECT_VERSION_STR_BUILD           "25"
-#define DLL_INJECT_VERSION_STR_DATETIME        "2022-01-09 01:13:16"
+#define DLL_INJECT_VERSION_ABCD 1,15,0,27
+#define DLL_INJECT_VERSION_STR "1.15.0"
+#define DLL_INJECT_VERSION_STR_BUILD "27"
+#define DLL_INJECT_VERSION_STR_DATETIME "2022-04-04 01:45:00"
 
 #ifndef XYO_RC
 
@@ -28,4 +28,3 @@ namespace DllInject {
 
 #endif
 #endif
-

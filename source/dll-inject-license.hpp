@@ -10,7 +10,6 @@
 #ifndef DLL_INJECT_LICENSE_HPP
 #define DLL_INJECT_LICENSE_HPP
 
-
 namespace DllInject {
 	namespace License {
 		const char *content();
