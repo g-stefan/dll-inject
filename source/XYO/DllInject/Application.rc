@@ -1,0 +1,11 @@
+// Dll Inject
+// Copyright (c) 2022 Grigore Stefan <g_stefan@yahoo.com>
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+// SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
+
+#include <XYO/DllInject/Application.rh>
+#include <XYO/DllInject/Copyright.rh>
+#include <XYO/DllInject/Version.rh>
+
+XYO_APPLICATION_VERSION_INFO(XYO_DLLINJECT,"dll-inject.exe","Dll Inject")

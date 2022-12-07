@@ -1,0 +1,16 @@
+// Dll Inject
+// Copyright (c) 2022 Grigore Stefan <g_stefan@yahoo.com>
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+// SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
+
+#ifndef XYO_DLLINJECT_COPYRIGHT_RH
+#define XYO_DLLINJECT_COPYRIGHT_RH
+
+#define XYO_DLLINJECT_COPYRIGHT "Copyright (c) 2022 Grigore Stefan"
+#define XYO_DLLINJECT_PUBLISHER "Grigore Stefan"
+#define XYO_DLLINJECT_COMPANY XYO_DLLINJECT_PUBLISHER
+#define XYO_DLLINJECT_CONTACT "g_stefan@yahoo.com"
+#define XYO_DLLINJECT_FULL_COPYRIGHT XYO_DLLINJECT_COPYRIGHT " <" XYO_DLLINJECT_CONTACT ">"
+
+#endif
