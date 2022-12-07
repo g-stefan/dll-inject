@@ -8,4 +8,7 @@
 #include <XYO/DllInject/Copyright.rh>
 #include <XYO/DllInject/Version.rh>
 
-XYO_APPLICATION_VERSION_INFO(XYO_DLLINJECT,"dll-inject.exe","Dll Inject")
+1  ICON "Application.ico"
+
+XYO_APPLICATION_VERSION_INFO(XYO_DLLINJECT,"dll-inject.exe","Dll Injector")
+XYO_APPLICATION_MANIFEST("Application.manifest")
