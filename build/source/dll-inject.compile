@@ -1,3 +1,0 @@
---exe dll-inject
---use-project=xyo-win-inject.static
---output-bin-path-is-output
