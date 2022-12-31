@@ -5,12 +5,12 @@
 		"make" : "exe.static",
 		"SPDX-License-Identifier": "MIT",
 		"sourcePath" : "XYO/DllInject",
-		"outputPath" : "output",
 		"dependency" : [
 			"xyo-win",
 			"xyo-win-inject"
 		],
 		"hasRelease" : true,
-		"githubRelease" : true
+		"githubRelease" : true,
+		"releaseDev" : false
 	}
 }
