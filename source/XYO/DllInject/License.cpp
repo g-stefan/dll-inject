@@ -1,5 +1,5 @@
 // Dll Inject
-// Copyright (c) 2005-2023 Grigore Stefan <g_stefan@yahoo.com>
+// Copyright (c) 2008-2023 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
 // SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: MIT
@@ -11,7 +11,7 @@ namespace XYO::DllInject::License {
 	static const char *license_ =
 	    "        MIT License\r\n"
 	    "\r\n"
-	    "Copyright (c) 2005-2023 Grigore Stefan <g_stefan@yahoo.com>\r\n"
+	    "Copyright (c) 2008-2023 Grigore Stefan <g_stefan@yahoo.com>\r\n"
 	    "\r\n"
 	    "Permission is hereby granted, free of charge, to any person obtaining a copy\r\n"
 	    "of this software and associated documentation files (the \" Software \"), to deal\r\n"
@@ -32,7 +32,7 @@ namespace XYO::DllInject::License {
 	    "SOFTWARE.\r\n";
 
 	static const char *shortLicense_ =
-	    "Copyright (c) 2005-2023 Grigore Stefan <g_stefan@yahoo.com>\r\n"
+	    "Copyright (c) 2008-2023 Grigore Stefan <g_stefan@yahoo.com>\r\n"
 	    "MIT License (MIT) <http://opensource.org/licenses/MIT>\r\n";
 
 	const char *license() {
