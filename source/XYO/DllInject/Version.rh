@@ -1,18 +1,18 @@
 // Dll Inject
 // Copyright (c) 2008-2023 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
-// SPDX-FileCopyrightText: 2022 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2008-2023 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: MIT
 
 #ifndef XYO_DLLINJECT_VERSION_RH
 #define XYO_DLLINJECT_VERSION_RH
 
 #ifndef XYO_DLLINJECT_NO_VERSION
-#define XYO_DLLINJECT_VERSION_ABCD 2,0,0,2
+#define XYO_DLLINJECT_VERSION_ABCD 2,0,0,3
 #define XYO_DLLINJECT_VERSION_STR "2.0.0"
-#define XYO_DLLINJECT_VERSION_STR_BUILD "2"
-#define XYO_DLLINJECT_VERSION_STR_DATETIME "2022-12-29 13:40:54"
-#define XYO_DLLINJECT_VERSION_STR_WITH_BUILD "2.0.0.2"
+#define XYO_DLLINJECT_VERSION_STR_BUILD "3"
+#define XYO_DLLINJECT_VERSION_STR_DATETIME "2023-01-09 16:17:30"
+#define XYO_DLLINJECT_VERSION_STR_WITH_BUILD "2.0.0.3"
 #else
 #define XYO_DLLINJECT_VERSION_ABCD 0,0,0,0
 #define XYO_DLLINJECT_VERSION_STR "0.0.0"
