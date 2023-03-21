@@ -41,7 +41,7 @@ namespace XYO::DllInject {
 	void Application::showUsage() {
 		printf("dll-inject - Inject dll in executable\n");
 		printf("version %s build %s [%s]\n", DllInject::Version::version(), DllInject::Version::build(), DllInject::Version::datetime());
-		printf("%s\n\n", DllInject::Copyright::copyright());
+		printf("%s\n\n", DllInject::Copyright::copyright().c_str());
 		printf("\n");
 		printf("Usage:\n");
 		printf("\tdll-inject --license\n");
@@ -53,7 +53,7 @@ namespace XYO::DllInject {
 	};
 
 	void Application::showLicense() {
-		printf("%s", DllInject::License::license());
+		printf("%s", DllInject::License::license().c_str());
 	};
 
 	void Application::showVersion() {
@@ -84,7 +84,7 @@ namespace XYO::DllInject {
 
 		if (cmdN == 2) {
 			if (strcmp(cmdS[1], "--license") == 0) {
-				printf("%s", DllInject::License::license());
+				printf("%s", DllInject::License::license().c_str());
 				return 0;
 			};
 			return 1;
