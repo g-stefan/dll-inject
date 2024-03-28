@@ -10,5 +10,5 @@
 
 1  ICON "Application.ico"
 
-XYO_APPLICATION_VERSION_INFO(XYO_DLLINJECT,"dll-inject.exe","Dll Injector")
-XYO_APPLICATION_MANIFEST("Application.manifest")
+XYO_PLATFORM_VERSION_INFO(XYO_DLLINJECT,"dll-inject.exe","Dll Injector")
+XYO_PLATFORM_MANIFEST("Application.manifest")
