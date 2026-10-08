@@ -44,6 +44,8 @@ namespace XYO::DllInject {
 		printf("%s\n\n", DllInject::Copyright::copyright());
 		printf("\n");
 		printf("Usage:\n");
+		printf("\tdll-inject --help\n");
+		printf("\tdll-inject --version\n");
 		printf("\tdll-inject --license\n");
 		printf("\tdll-inject [--wait] dll app [app.cmd]\n");
 		printf("\tdll-inject [--wait-hidden-realtime] dll app [app.cmd]\n");
@@ -65,87 +67,108 @@ namespace XYO::DllInject {
 		TDynamicArray<String>::initMemory();
 	};
 
+	String Application::buildCommandLine(int cmdN, char *cmdS[], int from) {
+		String commandLine;
+		int index;
+		for (index = from; index < cmdN; ++index) {
+			if (index > from) {
+				commandLine << " ";
+			};
+			commandLine << "\"" << cmdS[index] << "\"";
+		};
+		return commandLine;
+	};
+
+	bool Application::parseArguments(int cmdN, char *cmdS[], Arguments &arguments) {
+		int index;
+
+		arguments.action = Action::Run;
+		arguments.doWait = false;
+		arguments.doHidden = false;
+		arguments.doRealtime = false;
+		arguments.dllToInject = nullptr;
+		arguments.applicationToExecute = "";
+
+		index = 1;
+		if (index >= cmdN) {
+			// no arguments
+			return false;
+		};
+
+		// Informational options, each used on its own.
+		if (strcmp(cmdS[index], "--license") == 0) {
+			arguments.action = Action::ShowLicense;
+			return true;
+		};
+		if (strcmp(cmdS[index], "--version") == 0) {
+			arguments.action = Action::ShowVersion;
+			return true;
+		};
+		if ((strcmp(cmdS[index], "--help") == 0) || (strcmp(cmdS[index], "-h") == 0) || (strcmp(cmdS[index], "-?") == 0)) {
+			arguments.action = Action::ShowUsage;
+			return true;
+		};
+
+		// Optional mode flag; the forms are mutually exclusive.
+		if (strcmp(cmdS[index], "--wait") == 0) {
+			arguments.doWait = true;
+			++index;
+		} else if (strcmp(cmdS[index], "--wait-hidden-realtime") == 0) {
+			arguments.doWait = true;
+			arguments.doHidden = true;
+			arguments.doRealtime = true;
+			++index;
+		} else if (strcmp(cmdS[index], "--hidden-realtime") == 0) {
+			arguments.doHidden = true;
+			arguments.doRealtime = true;
+			++index;
+		} else if (strcmp(cmdS[index], "--hidden") == 0) {
+			arguments.doHidden = true;
+			++index;
+		} else if (strcmp(cmdS[index], "--realtime") == 0) {
+			arguments.doRealtime = true;
+			++index;
+		} else if (strncmp(cmdS[index], "--", 2) == 0) {
+			// Unknown option: reject instead of treating it as a dll path.
+			return false;
+		};
+
+		// A dll and an application (at least one token) are both required.
+		if ((cmdN - index) < 2) {
+			return false;
+		};
+
+		arguments.dllToInject = cmdS[index];
+		++index;
+
+		arguments.applicationToExecute = buildCommandLine(cmdN, cmdS, index);
+		return true;
+	};
+
 	int Application::main(int cmdN, char *cmdS[]) {
 		STARTUPINFO sInfo;
 		PROCESS_INFORMATION pInfo;
 		DWORD cwFlags;
-		bool retVal;
+		BOOL retVal;
+		Arguments arguments;
 
-		char *dllToInject;
-		int index;
-		String applicationToExecute;
-		bool doWait;
-		bool doHidden;
-		bool doRealtime;
-
-		doWait = false;
-		doHidden = false;
-		doRealtime = false;
-
-		if (cmdN == 2) {
-			if (strcmp(cmdS[1], "--license") == 0) {
-				printf("%s", DllInject::License::license().c_str());
-				return 0;
-			};
-			return 1;
-		};
-
-		if (cmdN < 3) {
+		if (!parseArguments(cmdN, cmdS, arguments)) {
 			showUsage();
 			return 1;
 		};
-		index = 1;
-		if (strcmp(cmdS[index], "--wait") == 0) {
-			if (cmdN < 4) {
-				showUsage();
-				return 1;
-			};
-			index++;
-			doWait = true;
-		};
-		if (strcmp(cmdS[index], "--wait-hidden-realtime") == 0) {
-			if (cmdN < 4) {
-				showUsage();
-				return 1;
-			};
-			index++;
-			doWait = true;
-			doHidden = true;
-			doRealtime = true;
-		};
-		if (strcmp(cmdS[index], "--hidden-realtime") == 0) {
-			if (cmdN < 4) {
-				showUsage();
-				return 1;
-			};
-			index++;
-			doHidden = true;
-			doRealtime = true;
-		};
-		if (strcmp(cmdS[index], "--hidden") == 0) {
-			if (cmdN < 4) {
-				showUsage();
-				return 1;
-			};
-			index++;
-			doHidden = true;
-		};
-		if (strcmp(cmdS[index], "--realtime") == 0) {
-			if (cmdN < 4) {
-				showUsage();
-				return 1;
-			};
-			index++;
-			doRealtime = true;
-		};
 
-		dllToInject = cmdS[index++];
-		applicationToExecute = "";
-		for (; index < cmdN; index++) {
-			applicationToExecute << "\"" << cmdS[index] << "\"";
-			if (index < cmdN) {
-				applicationToExecute << " ";
-			};
+		switch (arguments.action) {
+			case Action::ShowUsage:
+				showUsage();
+				return 0;
+			case Action::ShowLicense:
+				showLicense();
+				return 0;
+			case Action::ShowVersion:
+				showVersion();
+				return 0;
+			case Action::Run:
+				break;
 		};
 
 		ZeroMemory(&sInfo, sizeof(sInfo));
@@ -153,26 +176,30 @@ namespace XYO::DllInject {
 		sInfo.cb = sizeof(STARTUPINFO);
 		cwFlags = 0;
 
-		if (doHidden) {
-			sInfo.dwFlags |= STARTF_USESHOWWINDOW;
+		sInfo.dwFlags |= STARTF_USESHOWWINDOW;
+		if (arguments.doHidden) {
 			sInfo.wShowWindow = SW_HIDE;
 		} else {
-			sInfo.dwFlags |= STARTF_USESHOWWINDOW;
 			sInfo.wShowWindow = SW_SHOW;
 		};
 
-		if (doRealtime) {
+		if (arguments.doRealtime) {
 			cwFlags = REALTIME_PRIORITY_CLASS;
 		};
 
-		retVal = XYO::Win::Inject::Process::createProcessA(0, (char *)applicationToExecute.value(), 0, 0, FALSE, cwFlags, 0, 0, &sInfo, &pInfo, dllToInject);
-		if (retVal) {
-			if (doWait) {
-				WaitForSingleObject(pInfo.hThread, INFINITE);
-			};
-		} else {
+		retVal = XYO::Win::Inject::Process::createProcessA(0, (char *)arguments.applicationToExecute.value(), 0, 0, FALSE, cwFlags, 0, 0, &sInfo, &pInfo, arguments.dllToInject);
+		if (!retVal) {
 			return 1;
 		};
+
+		if (arguments.doWait) {
+			// Wait for the injected application to exit, not just its primary
+			// thread.
+			WaitForSingleObject(pInfo.hProcess, INFINITE);
+		};
+
+		CloseHandle(pInfo.hThread);
+		CloseHandle(pInfo.hProcess);
 
 		return 0;
 	};

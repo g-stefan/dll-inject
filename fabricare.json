@@ -1,5 +1,6 @@
 {
 	"solution": {
+		"namespace" : "xyo",
 		"name" : "dll-inject",
 		"type" : "xyo-cpp",
 		"projects": [
@@ -8,6 +9,24 @@
 				"make" : "exe",
 				"SPDX-License-Identifier": "MIT",
 				"sourcePath" : "XYO/DllInject",
+				"dependency" : [
+					"xyo-win",
+					"xyo-win-inject"
+				]
+			},
+			{
+				"name" : "test.01",
+				"make" : "exe",
+				"category" : "test",
+				"SPDX-License-Identifier": "Unlicense",
+				"sourcePath" : [
+					"@test",
+					"XYO/DllInject"
+				],
+				"sourcePrefix" : "",
+				"defines" : [
+					"XYO_DLLINJECT_LIBRARY"
+				],
 				"dependency" : [
 					"xyo-win",
 					"xyo-win-inject"
